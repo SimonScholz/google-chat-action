@@ -1,0 +1,30 @@
+name: "Google Chat Action"
+description: "Use this action to send notifications to a google chat."
+author: "Simon Scholz"
+
+inputs:
+  webhookUrl :
+    description: 'The webhook url of the google chat. Should be stored in an action secret.'
+    required: true
+  jobStatus:
+    description: 'The optional jobStatus. Values can be success, failure, cancelled. You should pass ${{ job.status }} here.'
+    required: false
+  title:
+    description: 'Optional title. If not set it defaults to the action name + optionally the job status.'
+    required: false
+  subtitle:
+    description: 'Optional subtitle. If not set the subtitle will not be shown.'
+    required: false
+  imageUrl:
+    description: 'Optional icon. If not set no icon will be shown.'
+    required: false
+  imageType:
+    description: 'Optional imageType (imageUrl must be set for this). Possible values are SQUARE and CIRCLE. If not set this will default to CIRCLE'
+    required: false
+  imageAltText:
+    description: 'Optional imageAltText. Alternative in case the image cannot be shown.'
+    required: false
+
+runs:
+  using: node20
+  main: dist/index.js
