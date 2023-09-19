@@ -9689,7 +9689,7 @@ function getHeaderTitle() {
     if (inputTitle.length !== 0) {
         return `${inputTitle} ${jobStatus}`;
     }
-    return `${github.context.action} ${jobStatus}`;
+    return `${github.context.job} ${jobStatus}`;
 }
 function getHeaderSubTitle() {
     const inputSubTitle = core.getInput('subtitle');

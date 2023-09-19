@@ -55,4 +55,5 @@ jobs:
         with:
           #webhookUrl: 'https://httpbin.org/status/200'
           webhookUrl: 'https://chat.googleapis.com/v1/spaces/AAAAwMODOhg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=v1eaQMnMdSbVfUMxpgoqrTI8lRW4C7BHnn7rWEgB9NY'
-          additionalSections: '[{"header": "Contact Info"}]'
+          additionalSections: '[{"header": "Additional Section", "collapsible": true, "widgets": [{"decoratedText": {"startIcon": {"knownIcon": "STAR",},"text": "Additional Section",}}] }]'
+          jobStatus: '${{ job.status }}'

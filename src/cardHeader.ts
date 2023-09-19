@@ -31,7 +31,7 @@ function getHeaderTitle(): string {
     return `${inputTitle} ${jobStatus}`
   }
 
-  return `${github.context.action} ${jobStatus}`
+  return `${github.context.job} ${jobStatus}`
 }
 
 function getHeaderSubTitle(): string | undefined {
