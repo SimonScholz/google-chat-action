@@ -9631,7 +9631,7 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 75:
+/***/ 7567:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -9660,38 +9660,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.createCardV2Body = void 0;
+exports.createCardV2Header = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
-function createCardV2Body() {
-    const cardHeader = createCardV2Header();
-    const jsonBody = {
-        cardsV2: [
-            {
-                card: {
-                    header: {},
-                    sections: [
-                        {
-                            header: 'TODO',
-                            widgets: [
-                                {
-                                    textParagraph: {
-                                        text: 'TODO'
-                                    }
-                                }
-                            ],
-                            collapsible: false,
-                            uncollapsibleWidgetsCount: 1
-                        }
-                    ]
-                }
-            }
-        ]
-    };
-    jsonBody.cardsV2[0].card.header = cardHeader;
-    return JSON.stringify(jsonBody);
-}
-exports.createCardV2Body = createCardV2Body;
 function createCardV2Header() {
     const cardHeader = {};
     const headerTitle = getHeaderTitle();
@@ -9711,6 +9682,7 @@ function createCardV2Header() {
     }
     return cardHeader;
 }
+exports.createCardV2Header = createCardV2Header;
 function getHeaderTitle() {
     const inputTitle = core.getInput('title');
     const jobStatus = core.getInput('jobStatus');
@@ -9747,6 +9719,161 @@ function getHeaderImageAltText() {
     }
     return undefined;
 }
+
+
+/***/ }),
+
+/***/ 4205:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createCardV2Section = void 0;
+const core = __importStar(__nccwpck_require__(2186));
+const github = __importStar(__nccwpck_require__(5438));
+function createCardV2Section() {
+    const repoPath = `${github.context.repo.owner}/${github.context.repo.repo}`;
+    const collapsibleSection = core.getBooleanInput('collapsibleSection');
+    const uncollapsibleWidgetsCount = getNumberResultAndValidate('uncollapsibleWidgetsCount');
+    return [
+        {
+            header: 'Contact Info',
+            collapsible: collapsibleSection,
+            uncollapsibleWidgetsCount,
+            widgets: [
+                {
+                    decoratedText: {
+                        startIcon: {
+                            knownIcon: 'STAR'
+                        },
+                        text: repoPath
+                    }
+                },
+                {
+                    buttonList: {
+                        buttons: [
+                            {
+                                text: 'Go to repo',
+                                onClick: {
+                                    openLink: {
+                                        url: `https://github.com/${repoPath}`
+                                    }
+                                }
+                            },
+                            {
+                                text: 'Go to action run',
+                                onClick: {
+                                    openLink: {
+                                        url: `https://github.com/${repoPath}/actions/runs/${github.context.runNumber}/job/${github.context.runId}`
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ];
+}
+exports.createCardV2Section = createCardV2Section;
+function getNumberResultAndValidate(propertyName) {
+    if (!propertyName) {
+        return undefined;
+    }
+    const value = core.getInput(propertyName);
+    const number = Number(value);
+    if (isNaN(number)) {
+        throw new Error(`${propertyName} needs to be a number`);
+    }
+    return getNumberOrUndefined(value);
+}
+function getNumberOrUndefined(value) {
+    if (!value || value === '')
+        return undefined;
+    const result = Number(value);
+    if (isNaN(result))
+        return undefined;
+    return result;
+}
+
+
+/***/ }),
+
+/***/ 75:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createCardV2Body = void 0;
+const core = __importStar(__nccwpck_require__(2186));
+const cardHeader_1 = __nccwpck_require__(7567);
+const cardSection_1 = __nccwpck_require__(4205);
+function createCardV2Body() {
+    const card = {};
+    const cardHeader = (0, cardHeader_1.createCardV2Header)();
+    card.header = cardHeader;
+    const createSection = core.getBooleanInput('createSection');
+    if (createSection) {
+        card.sections = (0, cardSection_1.createCardV2Section)();
+    }
+    const jsonBody = {
+        cardsV2: [
+            {
+                card
+            }
+        ]
+    };
+    return JSON.stringify(jsonBody);
+}
+exports.createCardV2Body = createCardV2Body;
 
 
 /***/ }),
@@ -9792,6 +9919,7 @@ async function run() {
     try {
         const webhookUrl = core.getInput('webhookUrl', { required: true });
         const cardV2Body = (0, cardv2body_1.createCardV2Body)();
+        console.log(cardV2Body);
         (0, notificationSender_1.notifyGoogleChat)(webhookUrl, cardV2Body);
     }
     catch (error) {
