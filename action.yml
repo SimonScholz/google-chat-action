@@ -7,7 +7,7 @@ inputs:
     description: 'The webhook url of the google chat. Should be stored in an action secret.'
     required: true
   jobStatus:
-    description: 'The optional jobStatus. Values can be success, failure, cancelled. You should pass ${{ job.status }} here.'
+    description: 'The optional jobStatus. Values can be success, failure, cancelled. You should pass job.status variable here.'
     required: false
   title:
     description: 'Optional title. If not set it defaults to the action name + optionally the job status.'
