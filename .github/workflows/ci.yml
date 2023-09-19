@@ -54,3 +54,4 @@ jobs:
         uses: ./
         with:
           webhookUrl: 'https://httpbin.org/status/200'
+          additionalSections: '[{"header": "Contact Info"}]'

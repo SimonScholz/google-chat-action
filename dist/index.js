@@ -9752,10 +9752,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.createCardV2Section = void 0;
+exports.createDefaultCardV2Section = exports.createCardV2Section = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 function createCardV2Section() {
+    const additionalSections = core.getInput('additionalSections');
+    const additionalSectionsJson = JSON.parse(additionalSections);
+    const defaultCardV2Section = createDefaultCardV2Section();
+    return defaultCardV2Section.concat(additionalSectionsJson);
+}
+exports.createCardV2Section = createCardV2Section;
+function createDefaultCardV2Section() {
     const repoPath = `${github.context.repo.owner}/${github.context.repo.repo}`;
     const collapsibleSection = core.getBooleanInput('collapsibleSection');
     const uncollapsibleWidgetsCount = getNumberResultAndValidate('uncollapsibleWidgetsCount');
@@ -9788,7 +9795,7 @@ function createCardV2Section() {
                                 text: 'Go to action run',
                                 onClick: {
                                     openLink: {
-                                        url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}/job/${github.context.sha}`
+                                        url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}`
                                     }
                                 }
                             }
@@ -9799,7 +9806,7 @@ function createCardV2Section() {
         }
     ];
 }
-exports.createCardV2Section = createCardV2Section;
+exports.createDefaultCardV2Section = createDefaultCardV2Section;
 function getNumberResultAndValidate(propertyName) {
     if (!propertyName) {
         return undefined;

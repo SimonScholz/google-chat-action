@@ -2,6 +2,14 @@ import * as core from '@actions/core'
 import * as github from '@actions/github'
 
 export function createCardV2Section(): object[] {
+  const additionalSections = core.getInput('additionalSections')
+  const additionalSectionsJson = JSON.parse(additionalSections)
+  const defaultCardV2Section = createDefaultCardV2Section()
+
+  return defaultCardV2Section.concat(additionalSectionsJson)
+}
+
+export function createDefaultCardV2Section(): object[] {
   const repoPath = `${github.context.repo.owner}/${github.context.repo.repo}`
   const collapsibleSection = core.getBooleanInput('collapsibleSection')
   const uncollapsibleWidgetsCount = getNumberResultAndValidate(
@@ -36,7 +44,7 @@ export function createCardV2Section(): object[] {
                 text: 'Go to action run',
                 onClick: {
                   openLink: {
-                    url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}/job/${github.context.sha}`
+                    url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}`
                   }
                 }
               }
