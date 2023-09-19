@@ -17,16 +17,17 @@ export function createDefaultCardV2Section(): object[] {
   )
   return [
     {
-      header: 'Contact Info',
+      header: repoPath,
       collapsible: collapsibleSection,
       uncollapsibleWidgetsCount,
       widgets: [
         {
           decoratedText: {
             startIcon: {
-              knownIcon: 'STAR'
+              iconUrl:
+                'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
             },
-            text: repoPath
+            text: github.context.ref
           }
         },
         {
