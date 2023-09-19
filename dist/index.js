@@ -9788,7 +9788,7 @@ function createCardV2Section() {
                                 text: 'Go to action run',
                                 onClick: {
                                     openLink: {
-                                        url: `https://github.com/${repoPath}/actions/runs/${github.context.runNumber}/job/${github.context.runId}`
+                                        url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}/job/${github.context.job}`
                                     }
                                 }
                             }
@@ -9955,7 +9955,7 @@ async function notifyGoogleChat(url, body) {
         },
         body
     });
-    if (response.status >= 200 && response.status <= 299) {
+    if (response.status < 200 && response.status > 299) {
         throw new Error(`Google Chat notification failed! error-response=${response.body} status=${response.status}`);
     }
 }
