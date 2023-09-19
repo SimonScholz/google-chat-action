@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
+import { statusColor, StatusColorKey } from './statusColors'
 
 export function createCardV2Header(): Record<string, string> {
   const cardHeader: Record<string, string> = {}
@@ -26,7 +27,14 @@ export function createCardV2Header(): Record<string, string> {
 
 function getHeaderTitle(): string {
   const inputTitle = core.getInput('title')
-  const jobStatus = core.getInput('jobStatus')
+  let jobStatus = core.getInput('jobStatus')
+
+  if (jobStatus) {
+    jobStatus = `<font color="${
+      statusColor[jobStatus as StatusColorKey]
+    }">${jobStatus}</font>`
+  }
+
   if (inputTitle.length !== 0) {
     return `${inputTitle} ${jobStatus}`
   }

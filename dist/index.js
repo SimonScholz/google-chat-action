@@ -9663,6 +9663,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createCardV2Header = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
+const statusColors_1 = __nccwpck_require__(3327);
 function createCardV2Header() {
     const cardHeader = {};
     const headerTitle = getHeaderTitle();
@@ -9685,7 +9686,10 @@ function createCardV2Header() {
 exports.createCardV2Header = createCardV2Header;
 function getHeaderTitle() {
     const inputTitle = core.getInput('title');
-    const jobStatus = core.getInput('jobStatus');
+    let jobStatus = core.getInput('jobStatus');
+    if (jobStatus) {
+        jobStatus = `<font color="${statusColors_1.statusColor[jobStatus]}">${jobStatus}</font>`;
+    }
     if (inputTitle.length !== 0) {
         return `${inputTitle} ${jobStatus}`;
     }
@@ -9967,6 +9971,22 @@ async function notifyGoogleChat(url, body) {
     }
 }
 exports.notifyGoogleChat = notifyGoogleChat;
+
+
+/***/ }),
+
+/***/ 3327:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.statusColor = void 0;
+exports.statusColor = {
+    success: '#96BB7C',
+    cancelled: '#FFD271',
+    failure: '#D54062'
+};
 
 
 /***/ }),
