@@ -36,7 +36,7 @@ export function createCardV2Section(): object[] {
                 text: 'Go to action run',
                 onClick: {
                   openLink: {
-                    url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}/job/${github.context.job}`
+                    url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}/job/${github.context.sha}`
                   }
                 }
               }
