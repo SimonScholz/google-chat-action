@@ -9663,7 +9663,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createCardV2Header = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
-const statusColors_1 = __nccwpck_require__(3327);
 function createCardV2Header() {
     const cardHeader = {};
     const headerTitle = getHeaderTitle();
@@ -9686,14 +9685,10 @@ function createCardV2Header() {
 exports.createCardV2Header = createCardV2Header;
 function getHeaderTitle() {
     const inputTitle = core.getInput('title');
-    let jobStatus = core.getInput('jobStatus');
-    if (jobStatus) {
-        jobStatus = `<font color="${statusColors_1.statusColor[jobStatus]}">${jobStatus}</font>`;
-    }
     if (inputTitle.length !== 0) {
-        return `${inputTitle} ${jobStatus}`;
+        return `${inputTitle}`;
     }
-    return `${github.context.job} ${jobStatus}`;
+    return `${github.context.job}`;
 }
 function getHeaderSubTitle() {
     const inputSubTitle = core.getInput('subtitle');
@@ -9759,6 +9754,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createDefaultCardV2Section = exports.createCardV2Section = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
+const statusIndication_1 = __nccwpck_require__(6334);
 function createCardV2Section() {
     const additionalSections = core.getInput('additionalSections');
     const additionalSectionsJson = JSON.parse(additionalSections);
@@ -9770,45 +9766,55 @@ function createDefaultCardV2Section() {
     const repoPath = `${github.context.repo.owner}/${github.context.repo.repo}`;
     const collapsibleSection = core.getBooleanInput('collapsibleSection');
     const uncollapsibleWidgetsCount = getNumberResultAndValidate('uncollapsibleWidgetsCount');
-    return [
+    const defaultCardV2Section = [
         {
             header: repoPath,
             collapsible: collapsibleSection,
             uncollapsibleWidgetsCount,
-            widgets: [
+            widgets: [{}]
+        }
+    ];
+    const jobStatus = core.getInput('jobStatus');
+    if (jobStatus) {
+        defaultCardV2Section[0].widgets.push({
+            decoratedText: {
+                startIcon: {
+                    iconUrl: statusIndication_1.statusImage[jobStatus]
+                },
+                text: `<font color="${statusIndication_1.statusColor[jobStatus]}">Run ${jobStatus}</font>`
+            }
+        });
+    }
+    defaultCardV2Section[0].widgets.push({
+        decoratedText: {
+            startIcon: {
+                iconUrl: 'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
+            },
+            text: github.context.ref
+        }
+    }, {
+        buttonList: {
+            buttons: [
                 {
-                    decoratedText: {
-                        startIcon: {
-                            iconUrl: 'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
-                        },
-                        text: github.context.ref
+                    text: 'Go to repo',
+                    onClick: {
+                        openLink: {
+                            url: `https://github.com/${repoPath}`
+                        }
                     }
                 },
                 {
-                    buttonList: {
-                        buttons: [
-                            {
-                                text: 'Go to repo',
-                                onClick: {
-                                    openLink: {
-                                        url: `https://github.com/${repoPath}`
-                                    }
-                                }
-                            },
-                            {
-                                text: 'Go to action run',
-                                onClick: {
-                                    openLink: {
-                                        url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}`
-                                    }
-                                }
-                            }
-                        ]
+                    text: 'Go to action run',
+                    onClick: {
+                        openLink: {
+                            url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}`
+                        }
                     }
                 }
             ]
         }
-    ];
+    });
+    return defaultCardV2Section;
 }
 exports.createDefaultCardV2Section = createDefaultCardV2Section;
 function getNumberResultAndValidate(propertyName) {
@@ -9975,17 +9981,22 @@ exports.notifyGoogleChat = notifyGoogleChat;
 
 /***/ }),
 
-/***/ 3327:
+/***/ 6334:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.statusColor = void 0;
+exports.statusImage = exports.statusColor = void 0;
 exports.statusColor = {
     success: '#96BB7C',
     cancelled: '#FFD271',
     failure: '#D54062'
+};
+exports.statusImage = {
+    success: 'https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Checkmark-128.png',
+    cancelled: 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_48-128.png',
+    failure: 'https://cdn2.iconfinder.com/data/icons/kids/128x128/apps/agt_action_fail.png'
 };
 
 

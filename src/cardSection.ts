@@ -1,5 +1,11 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
+import {
+  statusColor,
+  StatusColorKey,
+  statusImage,
+  StatusImageKey
+} from './statusIndication'
 
 export function createCardV2Section(): object[] {
   const additionalSections = core.getInput('additionalSections')
@@ -15,46 +21,66 @@ export function createDefaultCardV2Section(): object[] {
   const uncollapsibleWidgetsCount = getNumberResultAndValidate(
     'uncollapsibleWidgetsCount'
   )
-  return [
+
+  const defaultCardV2Section = [
     {
       header: repoPath,
       collapsible: collapsibleSection,
       uncollapsibleWidgetsCount,
-      widgets: [
-        {
-          decoratedText: {
-            startIcon: {
-              iconUrl:
-                'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
-            },
-            text: github.context.ref
-          }
-        },
-        {
-          buttonList: {
-            buttons: [
-              {
-                text: 'Go to repo',
-                onClick: {
-                  openLink: {
-                    url: `https://github.com/${repoPath}`
-                  }
-                }
-              },
-              {
-                text: 'Go to action run',
-                onClick: {
-                  openLink: {
-                    url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}`
-                  }
-                }
-              }
-            ]
-          }
-        }
-      ]
+      widgets: [{}]
     }
   ]
+
+  const jobStatus = core.getInput('jobStatus')
+
+  if (jobStatus) {
+    defaultCardV2Section[0].widgets.push({
+      decoratedText: {
+        startIcon: {
+          iconUrl: statusImage[jobStatus as StatusImageKey]
+        },
+        text: `<font color="${
+          statusColor[jobStatus as StatusColorKey]
+        }">Run ${jobStatus}</font>`
+      }
+    })
+  }
+
+  defaultCardV2Section[0].widgets.push(
+    {
+      decoratedText: {
+        startIcon: {
+          iconUrl:
+            'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
+        },
+        text: github.context.ref
+      }
+    },
+    {
+      buttonList: {
+        buttons: [
+          {
+            text: 'Go to repo',
+            onClick: {
+              openLink: {
+                url: `https://github.com/${repoPath}`
+              }
+            }
+          },
+          {
+            text: 'Go to action run',
+            onClick: {
+              openLink: {
+                url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}`
+              }
+            }
+          }
+        ]
+      }
+    }
+  )
+
+  return defaultCardV2Section
 }
 
 function getNumberResultAndValidate(propertyName?: string): number | undefined {
