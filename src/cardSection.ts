@@ -4,7 +4,9 @@ import {
   statusColor,
   StatusColorKey,
   statusImage,
-  StatusImageKey
+  StatusImageKey,
+  statusMessage,
+  StatusMessageKey
 } from './statusIndication'
 
 export function createCardV2Section(): object[] {
@@ -24,7 +26,6 @@ export function createDefaultCardV2Section(): object[] {
 
   const defaultCardV2Section = [
     {
-      header: repoPath,
       collapsible: collapsibleSection,
       uncollapsibleWidgetsCount,
       widgets: [{}]
@@ -39,14 +40,23 @@ export function createDefaultCardV2Section(): object[] {
         startIcon: {
           iconUrl: statusImage[jobStatus as StatusImageKey]
         },
-        text: `<font color="${
-          statusColor[jobStatus as StatusColorKey]
-        }">Run ${jobStatus}</font>`
+        text: `<font color="${statusColor[jobStatus as StatusColorKey]}">${
+          statusMessage[jobStatus as StatusMessageKey]
+        }</font>`
       }
     })
   }
 
   defaultCardV2Section[0].widgets.push(
+    {
+      decoratedText: {
+        startIcon: {
+          iconUrl:
+            'https://cdn1.iconfinder.com/data/icons/picons-social/57/github-128.png'
+        },
+        text: repoPath
+      }
+    },
     {
       decoratedText: {
         startIcon: {
@@ -61,6 +71,10 @@ export function createDefaultCardV2Section(): object[] {
         buttons: [
           {
             text: 'Go to repo',
+            icon: {
+              iconUrl:
+                'https://cdn1.iconfinder.com/data/icons/picons-social/57/github-128.png'
+            },
             onClick: {
               openLink: {
                 url: `https://github.com/${repoPath}`
@@ -69,6 +83,10 @@ export function createDefaultCardV2Section(): object[] {
           },
           {
             text: 'Go to action run',
+            icon: {
+              iconUrl:
+                'https://cdn0.iconfinder.com/data/icons/world-issues/500/running_man-128.png'
+            },
             onClick: {
               openLink: {
                 url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}`

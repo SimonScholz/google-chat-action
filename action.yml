@@ -35,7 +35,7 @@ inputs:
   uncollapsibleWidgetsCount:
     description: 'Optional uncollapsibleWidgetsCount. Specify the amount of uncollapsible widgets within the sections.'
     required: false
-    default: '2'
+    default: '3'
   additionalSections:
     description: 'Add the opportunity to have additional sections.'
     required: false

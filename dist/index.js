@@ -9768,7 +9768,6 @@ function createDefaultCardV2Section() {
     const uncollapsibleWidgetsCount = getNumberResultAndValidate('uncollapsibleWidgetsCount');
     const defaultCardV2Section = [
         {
-            header: repoPath,
             collapsible: collapsibleSection,
             uncollapsibleWidgetsCount,
             widgets: [{}]
@@ -9781,11 +9780,18 @@ function createDefaultCardV2Section() {
                 startIcon: {
                     iconUrl: statusIndication_1.statusImage[jobStatus]
                 },
-                text: `<font color="${statusIndication_1.statusColor[jobStatus]}">Run ${jobStatus}</font>`
+                text: `<font color="${statusIndication_1.statusColor[jobStatus]}">${statusIndication_1.statusMessage[jobStatus]}</font>`
             }
         });
     }
     defaultCardV2Section[0].widgets.push({
+        decoratedText: {
+            startIcon: {
+                iconUrl: 'https://cdn1.iconfinder.com/data/icons/picons-social/57/github-128.png'
+            },
+            text: repoPath
+        }
+    }, {
         decoratedText: {
             startIcon: {
                 iconUrl: 'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
@@ -9797,6 +9803,9 @@ function createDefaultCardV2Section() {
             buttons: [
                 {
                     text: 'Go to repo',
+                    icon: {
+                        iconUrl: 'https://cdn1.iconfinder.com/data/icons/picons-social/57/github-128.png'
+                    },
                     onClick: {
                         openLink: {
                             url: `https://github.com/${repoPath}`
@@ -9805,6 +9814,9 @@ function createDefaultCardV2Section() {
                 },
                 {
                     text: 'Go to action run',
+                    icon: {
+                        iconUrl: 'https://cdn0.iconfinder.com/data/icons/world-issues/500/running_man-128.png'
+                    },
                     onClick: {
                         openLink: {
                             url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}`
@@ -9987,7 +9999,7 @@ exports.notifyGoogleChat = notifyGoogleChat;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.statusImage = exports.statusColor = void 0;
+exports.statusMessage = exports.statusImage = exports.statusColor = void 0;
 exports.statusColor = {
     success: '#96BB7C',
     cancelled: '#FFD271',
@@ -9997,6 +10009,11 @@ exports.statusImage = {
     success: 'https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Checkmark-128.png',
     cancelled: 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_48-128.png',
     failure: 'https://cdn2.iconfinder.com/data/icons/kids/128x128/apps/agt_action_fail.png'
+};
+exports.statusMessage = {
+    success: 'Run was successful',
+    cancelled: 'Run was cancelled',
+    failure: 'Run failed'
 };
 
 

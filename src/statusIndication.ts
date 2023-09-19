@@ -13,5 +13,12 @@ export const statusImage = {
     'https://cdn2.iconfinder.com/data/icons/kids/128x128/apps/agt_action_fail.png'
 }
 
+export const statusMessage = {
+  success: 'Run was successful',
+  cancelled: 'Run was cancelled',
+  failure: 'Run failed'
+}
+
 export type StatusColorKey = keyof typeof statusColor
 export type StatusImageKey = keyof typeof statusImage
+export type StatusMessageKey = keyof typeof statusMessage
