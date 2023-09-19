@@ -10,7 +10,7 @@ inputs:
     description: 'The optional jobStatus. Values can be success, failure, cancelled. You should pass job.status variable here.'
     required: false
   title:
-    description: 'Optional title. If not set it defaults to the action name + optionally the job status.'
+    description: 'Optional title. If not set it defaults to the action name.'
     required: false
   subtitle:
     description: 'Optional subtitle. If not set the subtitle will not be shown.'
@@ -25,7 +25,7 @@ inputs:
     description: 'Optional imageAltText. Alternative in case the image cannot be shown.'
     required: false
   createSection:
-    description: 'Optional createSection. Specify whether the section should be shown or not.'
+    description: 'Optional createSection. Specify whether the default section should be shown or not.'
     required: false
     default: 'true'
   collapsibleSection:
@@ -35,7 +35,7 @@ inputs:
   uncollapsibleWidgetsCount:
     description: 'Optional uncollapsibleWidgetsCount. Specify the amount of uncollapsible widgets within the sections.'
     required: false
-    default: '3'
+    default: '4'
   additionalSections:
     description: 'Add the opportunity to have additional sections.'
     required: false

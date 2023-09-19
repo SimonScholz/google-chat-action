@@ -84,8 +84,7 @@ export function createDefaultCardV2Section(): object[] {
           {
             text: 'Go to action run',
             icon: {
-              iconUrl:
-                'https://cdn0.iconfinder.com/data/icons/world-issues/500/running_man-128.png'
+              knownIcon: 'STAR'
             },
             onClick: {
               openLink: {
