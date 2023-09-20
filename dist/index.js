@@ -9985,9 +9985,8 @@ async function notifyGoogleChat(url, body) {
         body
     });
     const responseBody = await response.json();
-    console.log(response.status);
-    console.log(responseBody);
-    if (response.status < 200 && response.status > 299) {
+    console.log(`Google Chat response: ${responseBody}`);
+    if (response.status < 200 || response.status > 299) {
         throw new Error(`Google Chat notification failed! error-message=${responseBody.error.message} status=${responseBody.error.status} code=${responseBody.error.code}`);
     }
 }
