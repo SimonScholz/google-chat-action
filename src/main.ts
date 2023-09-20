@@ -11,7 +11,7 @@ export async function run(): Promise<void> {
     const webhookUrl = core.getInput('webhookUrl', { required: true })
     const cardV2Body = createCardV2Body()
     console.log(cardV2Body)
-    notifyGoogleChat(webhookUrl, cardV2Body)
+    await notifyGoogleChat(webhookUrl, cardV2Body)
   } catch (error) {
     if (error instanceof Error) {
       core.setFailed(error.message)
@@ -22,3 +22,4 @@ export async function run(): Promise<void> {
     }
   }
 }
+ 

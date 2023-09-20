@@ -12,9 +12,6 @@ export async function notifyGoogleChat(
   })
 
   const responseBody = await response.json()
-  console.log(
-    `Google Chat notification failed! error-message=${responseBody.error.message} status=${responseBody.error.status} code=${responseBody.error.code}`
-  )
 
   if (response.status < 200 && response.status > 299) {
     throw new Error(
