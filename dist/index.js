@@ -9986,7 +9986,7 @@ async function notifyGoogleChat(url, body) {
     });
     const responseBody = await response.json();
     console.log(`Google Chat response: ${JSON.stringify(responseBody)}`);
-    if (response.status < 200 || response.status > 299) {
+    if (!response.ok) {
         throw new Error(`Google Chat notification failed! message=${responseBody.error.message} status=${responseBody.error.status} code=${responseBody.error.code}`);
     }
 }
@@ -10003,9 +10003,9 @@ exports.notifyGoogleChat = notifyGoogleChat;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.statusMessage = exports.statusImage = exports.statusColor = void 0;
 exports.statusColor = {
-    success: '#96BB7C',
-    cancelled: '#FFD271',
-    failure: '#D54062'
+    success: '#31AF91',
+    cancelled: '#EFCC00',
+    failure: '#FF0B0B'
 };
 exports.statusImage = {
     success: 'https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Checkmark-128.png',

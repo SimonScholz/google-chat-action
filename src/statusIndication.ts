@@ -1,7 +1,7 @@
 export const statusColor = {
-  success: '#96BB7C',
-  cancelled: '#FFD271',
-  failure: '#D54062'
+  success: '#31AF91',
+  cancelled: '#EFCC00',
+  failure: '#FF0B0B'
 }
 
 export const statusImage = {
