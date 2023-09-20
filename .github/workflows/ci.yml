@@ -54,7 +54,7 @@ jobs:
         uses: ./
         with:
           #webhookUrl: 'https://httpbin.org/status/200'
-          webhookUrl: 'https://chat.googleapis.com/v1/spaces/AAAAwMODOhg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=v1eaQMnMdSbVfUMxpgoqrTI8lRW4C7BHnn7rWEgB9NY'
+          webhookUrl: '${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}'
           additionalSections: '[{"header": "Additional Section", "collapsible": true, "widgets": [{"decoratedText": {"startIcon": {"knownIcon": "STAR"},"text": "Additional Section"}}] }]'
           jobStatus: '${{ job.status }}'
           imageUrl: https://cdn1.iconfinder.com/data/icons/social-media-2106/24/social_media_social_media_logo_docker-128.png
