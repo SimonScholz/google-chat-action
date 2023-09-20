@@ -9949,7 +9949,7 @@ async function run() {
         const webhookUrl = core.getInput('webhookUrl', { required: true });
         const cardV2Body = (0, cardv2body_1.createCardV2Body)();
         console.log(cardV2Body);
-        (0, notificationSender_1.notifyGoogleChat)(webhookUrl, cardV2Body);
+        await (0, notificationSender_1.notifyGoogleChat)(webhookUrl, cardV2Body);
     }
     catch (error) {
         if (error instanceof Error) {
@@ -9985,7 +9985,8 @@ async function notifyGoogleChat(url, body) {
         body
     });
     const responseBody = await response.json();
-    console.log(`Google Chat notification failed! error-message=${responseBody.error.message} status=${responseBody.error.status} code=${responseBody.error.code}`);
+    console.log(response.status);
+    console.log(responseBody);
     if (response.status < 200 && response.status > 299) {
         throw new Error(`Google Chat notification failed! error-message=${responseBody.error.message} status=${responseBody.error.status} code=${responseBody.error.code}`);
     }
