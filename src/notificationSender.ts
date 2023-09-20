@@ -9,8 +9,10 @@ export async function notifyGoogleChat(
       'Content-Type': 'application/json'
     },
     body
+  }).catch(error => {
+    throw new Error(`Google Chat notification failed! error=${error}`)
   })
-  console.log(`Google Chat Http Response: ${response}`)
+
   if (response.status < 200 && response.status > 299) {
     throw new Error(
       `Google Chat notification failed! error-response=${response.body} status=${response.status}`
