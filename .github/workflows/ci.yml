@@ -58,9 +58,9 @@ jobs:
           title: Google Chat GitHub Action
           subtitle: Brought to you by Simon ;-)
           imageUrl: https://raw.githubusercontent.com/SimonScholz/simonscholz.github.io/gatsby-homepage/src/assets/img/avatar.webp
-          imageType: SQUARE
+          imageType: CIRCLE
           imageAltText: Alternative image text
-          createDefaultSection: false
-          collapsibleDefaultSection: false
-          uncollapsibleWidgetsCount: 3
+          createDefaultSection: true
+          collapsibleDefaultSection: true
+          uncollapsibleWidgetsCount: 4
           additionalSections: '[{"header": "Additional Section", "collapsible": true, "widgets": [{"decoratedText": {"startIcon": {"knownIcon": "STAR"},"text": "Additional Section"}}] }]'

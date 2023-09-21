@@ -95,6 +95,14 @@ on:
         additionalSections: '[{"header": "Additional Section", "collapsible": true, "widgets": [{"decoratedText": {"startIcon": {"knownIcon": "STAR"},"text": "Additional Section"}}] }]'
 ```
 
+Due to setting `createDefaultSection` and `collapsibleDefaultSection` to false this card also looks pretty small:
+
+![Card with all input properties](./docs/all-input-properties-card.png)
+
+With the `additionalSections` you also gain a lot freedom and also other actions could come up with something suitable like my [postman-newman-action](https://github.com/SimonScholz/postman-newman-action) does when setting its `outputGoogleCardV2` input property to true.
+
+How an `additionalSections` array has to look like can be found here: https://developers.google.com/chat/api/reference/rest/v1/cards#section 
+
 ## inputs
 
 You can also refer to the [action.yml](https://github.com/SimonScholz/google-chat-action/blob/main/action.yml).
@@ -111,4 +119,4 @@ You can also refer to the [action.yml](https://github.com/SimonScholz/google-cha
 | createDefaultSection | Optional createDefaultSection. Specify whether the default section should be shown or not. |    🚫      |
 | collapsibleDefaultSection | Optional collapsibleSection. Specify whether the section is collapsible.  |    🚫      |
 | uncollapsibleWidgetsCount | Optional uncollapsibleWidgetsCount. Specify the amount of uncollapsible widgets within the sections. |    🚫      |
-| additionalSections | Add the opportunity to have additional sections. Also see https://developers.google.com/chat/api/reference/rest/v1/cards#section array. |    🚫      |
+| additionalSections | Add the opportunity to have additional sections. Also see [Google Chat Card V2](https://developers.google.com/chat/api/reference/rest/v1/cards#section) sections array. |    🚫      |
