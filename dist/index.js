@@ -9784,6 +9784,58 @@ function createDefaultCardV2Section() {
             }
         });
     }
+    const buttonArray = [
+        {
+            text: 'Go to repo',
+            icon: {
+                iconUrl: 'https://cdn1.iconfinder.com/data/icons/picons-social/57/github-128.png'
+            },
+            onClick: {
+                openLink: {
+                    url: `https://github.com/${repoPath}`
+                }
+            }
+        },
+        {
+            text: 'Go to action run',
+            icon: {
+                knownIcon: 'STAR'
+            },
+            onClick: {
+                openLink: {
+                    url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}`
+                }
+            }
+        }
+    ];
+    if (github.context.eventName === 'push') {
+        const pushCommitUrl = `https://github.com/${repoPath}/commit/${github.context.sha}`;
+        buttonArray.push({
+            text: 'Go to commit',
+            icon: {
+                iconUrl: 'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
+            },
+            onClick: {
+                openLink: {
+                    url: pushCommitUrl
+                }
+            }
+        });
+    }
+    else if (github.context.eventName === 'pull_request') {
+        const pullRequestUrl = `https://github.com/${repoPath}/pull/${github.context.issue.number}`;
+        buttonArray.push({
+            text: 'Go to pull request',
+            icon: {
+                iconUrl: 'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
+            },
+            onClick: {
+                openLink: {
+                    url: pullRequestUrl
+                }
+            }
+        });
+    }
     defaultCardV2Section[0].widgets.push({
         decoratedText: {
             startIcon: {
@@ -9800,30 +9852,7 @@ function createDefaultCardV2Section() {
         }
     }, {
         buttonList: {
-            buttons: [
-                {
-                    text: 'Go to repo',
-                    icon: {
-                        iconUrl: 'https://cdn1.iconfinder.com/data/icons/picons-social/57/github-128.png'
-                    },
-                    onClick: {
-                        openLink: {
-                            url: `https://github.com/${repoPath}`
-                        }
-                    }
-                },
-                {
-                    text: 'Go to action run',
-                    icon: {
-                        knownIcon: 'STAR'
-                    },
-                    onClick: {
-                        openLink: {
-                            url: `https://github.com/${repoPath}/actions/runs/${github.context.runId}`
-                        }
-                    }
-                }
-            ]
+            buttons: buttonArray
         }
     });
     return defaultCardV2Section;
