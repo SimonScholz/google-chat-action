@@ -5,6 +5,34 @@ Github action to send Cards V2 to the google chat via webhook.
 ## Quick start
 
 ```yaml
+name: Send Message to Google Chat
+
+on:
+  pull_request:
+  push:
+    branches:
+
+  google-chat-action:
+    name: Google Chat GitHub Action
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      # ... Run your build stuff or whatever ...
+
+      - name: Notify Google Chat
+        if: ${{ always() }} # Use always to ensure that the notification is also send on failure of former steps
+        uses: SimonScholz/google-chat-action@main
+        with:
+          webhookUrl: '${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}'
+```
+
+## Example with all input values
+
+```yaml
   - name: Notify Google Chat
     id: test-action
     uses: SimonScholz/google-chat-action@main

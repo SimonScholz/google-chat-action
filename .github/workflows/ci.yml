@@ -40,7 +40,7 @@ jobs:
         id: npm-ci-test
         run: npm run ci-test
 
-  test-action:
+  google-chat-action:
     name: GitHub Actions Test
     runs-on: ubuntu-latest
 
