@@ -54,3 +54,4 @@ jobs:
         uses: ./
         with:
           webhookUrl: '${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}'
+          jobStatus: '${{ job.status }}'

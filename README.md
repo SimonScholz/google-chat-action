@@ -4,6 +4,12 @@ Github action to send Cards V2 to the google chat via webhook.
 
 ## Quick start
 
+![Bare Minimum Google Chat Card](./docs/bare-minimum-card.png)
+
+You'll get this bare minimum Google Chat card in case you only specify the required input, which is the `webhookUrl`.
+In order to obtain this `webhookUrl` you need to click on the desired Google Chat, go to "Apps & Integrations" and then click on the "+ Add webhooks" button.
+
+
 ```yaml
 name: Send Message to Google Chat
 
@@ -28,6 +34,42 @@ on:
         uses: SimonScholz/google-chat-action@main
         with:
           webhookUrl: '${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}'
+```
+
+In case the action is triggered by a `pull_request` the last button in the button list will be "Go to pull request" instead of "Go to commit", which is shown on `push`.
+If it is neither a `pull_request` nor a `push` trigger then only the "Go to repo" and "Go to action run" buttons will be shown.
+
+## Also visualize the Status of the run
+
+Usually notifications triggered by a github action are supposed to inform about the outcome of the action.
+
+In order to see `success`, `failure` or `cancellation` the `${{ job.status }}` has to be passed to the action.
+
+```yaml
+name: Send Message to Google Chat
+
+on:
+  pull_request:
+  push:
+    branches:
+
+  google-chat-action:
+    name: Google Chat GitHub Action
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      # ... Run your build stuff or whatever ...
+
+      - name: Notify Google Chat
+        if: ${{ always() }} # Use always to ensure that the notification is also send on failure of former steps
+        uses: SimonScholz/google-chat-action@main
+        with:
+          webhookUrl: '${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}'
+          jobStatus: '${{ job.status }}'
 ```
 
 ## Example with all input values
