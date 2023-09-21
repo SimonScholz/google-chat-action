@@ -24,11 +24,11 @@ inputs:
   imageAltText:
     description: 'Optional imageAltText. Alternative in case the image cannot be shown.'
     required: false
-  createSection:
-    description: 'Optional createSection. Specify whether the default section should be shown or not.'
+  createDefaultSection:
+    description: 'Optional createDefaultSection. Specify whether the default section should be shown or not.'
     required: false
     default: 'true'
-  collapsibleSection:
+  collapsibleDefaultSection:
     description: 'Optional collapsibleSection. Specify whether the section is collapsible.'
     required: false
     default: 'true'

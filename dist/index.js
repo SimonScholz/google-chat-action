@@ -9764,11 +9764,11 @@ function createCardV2Section() {
 exports.createCardV2Section = createCardV2Section;
 function createDefaultCardV2Section() {
     const repoPath = `${github.context.repo.owner}/${github.context.repo.repo}`;
-    const collapsibleSection = core.getBooleanInput('collapsibleSection');
+    const collapsibleDefaultSection = core.getBooleanInput('collapsibleDefaultSection');
     const uncollapsibleWidgetsCount = getNumberResultAndValidate('uncollapsibleWidgetsCount');
     const defaultCardV2Section = [
         {
-            collapsible: collapsibleSection,
+            collapsible: collapsibleDefaultSection,
             uncollapsibleWidgetsCount,
             widgets: [{}]
         }
@@ -9918,9 +9918,13 @@ function createCardV2Body() {
     const card = {};
     const cardHeader = (0, cardHeader_1.createCardV2Header)();
     card.header = cardHeader;
-    const createSection = core.getBooleanInput('createSection');
-    if (createSection) {
+    const createDefaultSection = core.getBooleanInput('createDefaultSection');
+    if (createDefaultSection) {
         card.sections = (0, cardSection_1.createCardV2Section)();
+    }
+    else {
+        const additionalSections = core.getInput('additionalSections');
+        card.sections = JSON.parse(additionalSections);
     }
     const jsonBody = {
         cardsV2: [

@@ -54,4 +54,13 @@ jobs:
         uses: ./
         with:
           webhookUrl: '${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}'
-          jobStatus: '${{ job.status }}'
+          jobStatus: ${{ job.status }}
+          title: Google Chat GitHub Action
+          subtitle: Brought to you by Simon ;-)
+          imageUrl: https://raw.githubusercontent.com/SimonScholz/simonscholz.github.io/gatsby-homepage/src/assets/img/avatar.webp
+          imageType: SQUARE
+          imageAltText: Alternative image text
+          createDefaultSection: false
+          collapsibleDefaultSection: false
+          uncollapsibleWidgetsCount: 3
+          additionalSections: '[{"header": "Additional Section", "collapsible": true, "widgets": [{"decoratedText": {"startIcon": {"knownIcon": "STAR"},"text": "Additional Section"}}] }]'

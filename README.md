@@ -45,6 +45,8 @@ Usually notifications triggered by a github action are supposed to inform about 
 
 In order to see `success`, `failure` or `cancellation` the `${{ job.status }}` has to be passed to the action.
 
+![Minimalistic card with job status](./docs/jobstatus-minimum-card.png)
+
 ```yaml
 name: Send Message to Google Chat
 
@@ -77,20 +79,25 @@ on:
 ```yaml
   - name: Notify Google Chat
     id: test-action
+    if: failure() # only send notification in case of failure
     uses: SimonScholz/google-chat-action@main
     with:
-        webhookUrl: {your google chat webhook url}
+        webhookUrl: '${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}'
         jobStatus: ${{ job.status }}
+        title: Google Chat GitHub Action
         subtitle: Brought to you by Simon ;-)
         imageUrl: https://raw.githubusercontent.com/SimonScholz/simonscholz.github.io/gatsby-homepage/src/assets/img/avatar.webp
         imageType: SQUARE
         imageAltText: Alternative image text
+        createDefaultSection: false
+        collapsibleDefaultSection: false
+        uncollapsibleWidgetsCount: 3
         additionalSections: '[{"header": "Additional Section", "collapsible": true, "widgets": [{"decoratedText": {"startIcon": {"knownIcon": "STAR"},"text": "Additional Section"}}] }]'
-
-    if: failure() # only send notification in case of failure
 ```
 
 ## inputs
+
+You can also refer to the [action.yml](https://github.com/SimonScholz/google-chat-action/blob/main/action.yml).
 
 | Property      | Description                     | Required   |
 | ------------- | ------------------------------- | :--------: |
@@ -101,7 +108,7 @@ on:
 | imageUrl      | Optional icon. If not set, no icon will be shown. |    🚫      |
 | imageType     | Optional imageType (imageUrl must be set for this). Possible values are SQUARE and CIRCLE. If not set, this will default to CIRCLE. |    🚫      |
 | imageAltText  | Optional imageAltText. Alternative in case the image cannot be shown. |    🚫      |
-| createSection | Optional createSection. Specify whether the default section should be shown or not. |    🚫      |
-| collapsibleSection | Optional collapsibleSection. Specify whether the section is collapsible.  |    🚫      |
+| createDefaultSection | Optional createDefaultSection. Specify whether the default section should be shown or not. |    🚫      |
+| collapsibleDefaultSection | Optional collapsibleSection. Specify whether the section is collapsible.  |    🚫      |
 | uncollapsibleWidgetsCount | Optional uncollapsibleWidgetsCount. Specify the amount of uncollapsible widgets within the sections. |    🚫      |
 | additionalSections | Add the opportunity to have additional sections. Also see https://developers.google.com/chat/api/reference/rest/v1/cards#section array. |    🚫      |

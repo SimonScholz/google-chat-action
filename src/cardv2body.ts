@@ -7,9 +7,12 @@ export function createCardV2Body(): string {
   const cardHeader: Record<string, string> = createCardV2Header()
   card.header = cardHeader
 
-  const createSection = core.getBooleanInput('createSection')
-  if (createSection) {
+  const createDefaultSection = core.getBooleanInput('createDefaultSection')
+  if (createDefaultSection) {
     card.sections = createCardV2Section()
+  } else {
+    const additionalSections = core.getInput('additionalSections')
+    card.sections = JSON.parse(additionalSections)
   }
 
   const jsonBody = {
