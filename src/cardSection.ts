@@ -11,7 +11,7 @@ import {
 } from './statusIndication'
 
 const gitHubIconUrl =
-  'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/github-128.png'
+  'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/github-cat-128.png'
 const gitHubCircleIconUrl =
   'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/github-128-circle.png'
 const gitBranchIconUrl =
