@@ -107,16 +107,16 @@ How an `additionalSections` array has to look like can be found here: https://de
 
 You can also refer to the [action.yml](https://github.com/SimonScholz/google-chat-action/blob/main/action.yml).
 
-| Property      | Description                     | Required   |
-| ------------- | ------------------------------- | :--------: |
-| webhookUrl    | The webhook URL of the Google Chat. Should be stored in an action secret. |    ✅      |
-| jobStatus     | The optional jobStatus. Values can be success, failure, cancelled. You should pass ${{ job.status }} here. |    🚫      |
-| title         | Optional title. If not set, it defaults to the action name + job status. |    🚫      |
-| subtitle      | Optional subtitle. If not set, the subtitle will not be shown. |    🚫      |
-| imageUrl      | Optional icon. If not set, no icon will be shown. |    🚫      |
-| imageType     | Optional imageType (imageUrl must be set for this). Possible values are SQUARE and CIRCLE. If not set, this will default to CIRCLE. |    🚫      |
-| imageAltText  | Optional imageAltText. Alternative in case the image cannot be shown. |    🚫      |
-| createDefaultSection | Optional createDefaultSection. Specify whether the default section should be shown or not. |    🚫      |
-| collapsibleDefaultSection | Optional collapsibleSection. Specify whether the section is collapsible.  |    🚫      |
-| uncollapsibleWidgetsCount | Optional uncollapsibleWidgetsCount. Specify the amount of uncollapsible widgets within the sections. |    🚫      |
-| additionalSections | Add the opportunity to have additional sections. Also see [Google Chat Card V2](https://developers.google.com/chat/api/reference/rest/v1/cards#section) sections array. |    🚫      |
+| Property      | Description                     |  Default  | Required   |
+| ------------- | ------------------------------- | :-------: | :--------: |
+| webhookUrl    | The webhook URL of the Google Chat. Should be stored in an action secret. | 🚫 |    ✅      |
+| jobStatus     | The optional jobStatus. Values can be success, failure, cancelled. You should pass `${{ job.status }}` here. | 🚫  |    🚫      |
+| title         | Optional title. If not set, it defaults to the action name | Action name |    🚫      |
+| subtitle      | Optional subtitle. If not set, the subtitle will not be shown. | 🚫 (invisible) |   🚫      |
+| imageUrl      | Optional icon. If not set, no icon will be shown. | 🚫 |    🚫      |
+| imageType     | Optional imageType (imageUrl must be set for this). Possible values are SQUARE and CIRCLE. | CIRCLE |    🚫      |
+| imageAltText  | Optional imageAltText. Alternative in case the image cannot be shown. | 🚫  |    🚫      |
+| createDefaultSection | Optional createSection. Specify whether the default section should be shown or not. | true  |    🚫      |
+| collapsibleDefaultSection | Optional collapsibleSection. Specify whether the section is collapsible.  | false |   🚫      |
+| uncollapsibleWidgetsCount | Optional uncollapsibleWidgetsCount. Specify the amount of uncollapsible widgets within the sections. | 4 |   🚫      |
+| additionalSections |  Add the opportunity to have additional sections. Also see [Google Chat Card V2](https://developers.google.com/chat/api/reference/rest/v1/cards#section) sections array. | 🚫 |    🚫      |
