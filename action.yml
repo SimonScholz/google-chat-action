@@ -2,6 +2,14 @@ name: "Google Chat Action"
 description: "Use this action to send notifications to a google chat."
 author: "Simon Scholz"
 
+runs:
+  using: node20
+  main: dist/index.js
+
+branding:
+  icon: 'message-circle'
+  color: 'blue'
+
 inputs:
   webhookUrl :
     description: 'The webhook url of the google chat. Should be stored in an action secret.'
@@ -40,7 +48,3 @@ inputs:
     description: 'Add the opportunity to have additional sections.'
     required: false
     default: '[]'
-
-runs:
-  using: node20
-  main: dist/index.js
