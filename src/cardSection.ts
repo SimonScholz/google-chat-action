@@ -12,8 +12,12 @@ import {
 
 const gitHubIconUrl =
   'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/github-128.png'
+const gitHubIconUrlWhite =
+  'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/github-128-white.png'
 const gitBranchIconUrl =
   'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/git-branch-128.png'
+const gitBranchIconUrlWhite =
+  'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/git-branch-128-white.png'
 
 export function createCardV2Section(): object[] {
   const additionalSections = core.getInput('additionalSections')
@@ -112,7 +116,7 @@ export function createDefaultCardV2Section(): object[] {
     {
       decoratedText: {
         startIcon: {
-          iconUrl: gitHubIconUrl
+          iconUrl: gitHubIconUrlWhite
         },
         text: repoPath
       }
@@ -120,7 +124,7 @@ export function createDefaultCardV2Section(): object[] {
     {
       decoratedText: {
         startIcon: {
-          iconUrl: gitBranchIconUrl
+          iconUrl: gitBranchIconUrlWhite
         },
         text: github.context.ref
       }

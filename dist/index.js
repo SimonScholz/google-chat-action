@@ -9756,7 +9756,9 @@ const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const statusIndication_1 = __nccwpck_require__(6334);
 const gitHubIconUrl = 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/github-128.png';
+const gitHubIconUrlWhite = 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/github-128-white.png';
 const gitBranchIconUrl = 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/git-branch-128.png';
+const gitBranchIconUrlWhite = 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/git-branch-128-white.png';
 function createCardV2Section() {
     const additionalSections = core.getInput('additionalSections');
     const additionalSectionsJson = JSON.parse(additionalSections);
@@ -9841,14 +9843,14 @@ function createDefaultCardV2Section() {
     defaultCardV2Section[0].widgets.push({
         decoratedText: {
             startIcon: {
-                iconUrl: gitHubIconUrl
+                iconUrl: gitHubIconUrlWhite
             },
             text: repoPath
         }
     }, {
         decoratedText: {
             startIcon: {
-                iconUrl: gitBranchIconUrl
+                iconUrl: gitBranchIconUrlWhite
             },
             text: github.context.ref
         }
