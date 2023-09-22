@@ -6,11 +6,11 @@ export const statusColor = {
 
 export const statusImage = {
   success:
-    'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/success-128.webp',
+    'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/success-128.png',
   cancelled:
-    'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/cancelled-128.webp',
+    'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/cancelled-128.png',
   failure:
-    'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/failure-128.webp'
+    'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/failure-128.png'
 }
 
 export const statusMessage = {

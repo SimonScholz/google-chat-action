@@ -11,9 +11,9 @@ import {
 } from './statusIndication'
 
 const gitHubIconUrl =
-  'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/github-128.webp'
+  'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/github-128.png'
 const gitBranchIconUrl =
-  'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/git-branch-128.webp'
+  'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/git-branch-128.png'
 
 export function createCardV2Section(): object[] {
   const additionalSections = core.getInput('additionalSections')

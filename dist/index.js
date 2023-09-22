@@ -9755,8 +9755,8 @@ exports.createDefaultCardV2Section = exports.createCardV2Section = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const statusIndication_1 = __nccwpck_require__(6334);
-const gitHubIconUrl = 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/github-128.webp';
-const gitBranchIconUrl = 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/git-branch-128.webp';
+const gitHubIconUrl = 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/github-128.png';
+const gitBranchIconUrl = 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/git-branch-128.png';
 function createCardV2Section() {
     const additionalSections = core.getInput('additionalSections');
     const additionalSectionsJson = JSON.parse(additionalSections);
@@ -10043,9 +10043,9 @@ exports.statusColor = {
     failure: '#FF0B0B'
 };
 exports.statusImage = {
-    success: 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/success-128.webp',
-    cancelled: 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/cancelled-128.webp',
-    failure: 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/failure-128.webp'
+    success: 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/success-128.png',
+    cancelled: 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/cancelled-128.png',
+    failure: 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/failure-128.png'
 };
 exports.statusMessage = {
     success: 'Run was successful',
