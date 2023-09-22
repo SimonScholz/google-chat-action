@@ -10,6 +10,11 @@ import {
   StatusMessageKey
 } from './statusIndication'
 
+const gitHubIconUrl =
+  'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/github-128.webp'
+const gitBranchIconUrl =
+  'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/git-branch-128.webp'
+
 export function createCardV2Section(): object[] {
   const additionalSections = core.getInput('additionalSections')
   const additionalSectionsJson = JSON.parse(additionalSections)
@@ -54,8 +59,7 @@ export function createDefaultCardV2Section(): object[] {
     {
       text: 'Go to repo',
       icon: {
-        iconUrl:
-          'https://cdn1.iconfinder.com/data/icons/picons-social/57/github-128.png'
+        iconUrl: gitHubIconUrl
       },
       onClick: {
         openLink: {
@@ -81,8 +85,7 @@ export function createDefaultCardV2Section(): object[] {
     buttonArray.push({
       text: 'Go to commit',
       icon: {
-        iconUrl:
-          'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
+        iconUrl: gitBranchIconUrl
       },
       onClick: {
         openLink: {
@@ -95,8 +98,7 @@ export function createDefaultCardV2Section(): object[] {
     buttonArray.push({
       text: 'Go to pull request',
       icon: {
-        iconUrl:
-          'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
+        iconUrl: gitBranchIconUrl
       },
       onClick: {
         openLink: {
@@ -110,8 +112,7 @@ export function createDefaultCardV2Section(): object[] {
     {
       decoratedText: {
         startIcon: {
-          iconUrl:
-            'https://cdn1.iconfinder.com/data/icons/picons-social/57/github-128.png'
+          iconUrl: gitHubIconUrl
         },
         text: repoPath
       }
@@ -119,8 +120,7 @@ export function createDefaultCardV2Section(): object[] {
     {
       decoratedText: {
         startIcon: {
-          iconUrl:
-            'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
+          iconUrl: gitBranchIconUrl
         },
         text: github.context.ref
       }

@@ -6,11 +6,11 @@ export const statusColor = {
 
 export const statusImage = {
   success:
-    'https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Checkmark-128.png',
+    'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/success-128.webp',
   cancelled:
-    'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_48-128.png',
+    'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/cancelled-128.webp',
   failure:
-    'https://cdn2.iconfinder.com/data/icons/kids/128x128/apps/agt_action_fail.png'
+    'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/failure-128.webp'
 }
 
 export const statusMessage = {

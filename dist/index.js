@@ -9755,6 +9755,8 @@ exports.createDefaultCardV2Section = exports.createCardV2Section = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const statusIndication_1 = __nccwpck_require__(6334);
+const gitHubIconUrl = 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/github-128.webp';
+const gitBranchIconUrl = 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/git-branch-128.webp';
 function createCardV2Section() {
     const additionalSections = core.getInput('additionalSections');
     const additionalSectionsJson = JSON.parse(additionalSections);
@@ -9788,7 +9790,7 @@ function createDefaultCardV2Section() {
         {
             text: 'Go to repo',
             icon: {
-                iconUrl: 'https://cdn1.iconfinder.com/data/icons/picons-social/57/github-128.png'
+                iconUrl: gitHubIconUrl
             },
             onClick: {
                 openLink: {
@@ -9813,7 +9815,7 @@ function createDefaultCardV2Section() {
         buttonArray.push({
             text: 'Go to commit',
             icon: {
-                iconUrl: 'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
+                iconUrl: gitBranchIconUrl
             },
             onClick: {
                 openLink: {
@@ -9827,7 +9829,7 @@ function createDefaultCardV2Section() {
         buttonArray.push({
             text: 'Go to pull request',
             icon: {
-                iconUrl: 'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
+                iconUrl: gitBranchIconUrl
             },
             onClick: {
                 openLink: {
@@ -9839,14 +9841,14 @@ function createDefaultCardV2Section() {
     defaultCardV2Section[0].widgets.push({
         decoratedText: {
             startIcon: {
-                iconUrl: 'https://cdn1.iconfinder.com/data/icons/picons-social/57/github-128.png'
+                iconUrl: gitHubIconUrl
             },
             text: repoPath
         }
     }, {
         decoratedText: {
             startIcon: {
-                iconUrl: 'https://cdn0.iconfinder.com/data/icons/octicons/1024/git-branch-128.png'
+                iconUrl: gitBranchIconUrl
             },
             text: github.context.ref
         }
@@ -10041,9 +10043,9 @@ exports.statusColor = {
     failure: '#FF0B0B'
 };
 exports.statusImage = {
-    success: 'https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Checkmark-128.png',
-    cancelled: 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_48-128.png',
-    failure: 'https://cdn2.iconfinder.com/data/icons/kids/128x128/apps/agt_action_fail.png'
+    success: 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/success-128.webp',
+    cancelled: 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/cancelled-128.webp',
+    failure: 'https://raw.githubusercontent.com/SimonScholz/google-chat-action/main/assets/failure-128.webp'
 };
 exports.statusMessage = {
     success: 'Run was successful',
