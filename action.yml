@@ -1,5 +1,5 @@
-name: "Google Chat Action"
-description: "Use this action to send notifications to a google chat."
+name: "Google Chat Notification Action"
+description: "GitHub action to send highly customizable card V2 notifications to a google chat via webhook."
 author: "Simon Scholz"
 
 runs:
