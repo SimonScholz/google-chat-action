@@ -8,10 +8,17 @@ import { notifyGoogleChat } from './notificationSender'
  */
 export async function run(): Promise<void> {
   try {
-    const webhookUrl = core.getInput('webhookUrl', { required: true })
-    const cardV2Body = createCardV2Body()
+    let webhookUrl = core.getInput('webhookUrl', { required: true })
+    const threadName = core.getInput('threadName')
+    const threadKey = core.getInput('threadKey')
+    const cardV2Body = createCardV2Body(threadName, threadKey)
     console.log(cardV2Body)
-    await notifyGoogleChat(webhookUrl, cardV2Body)
+    if (threadName || threadKey) {
+      webhookUrl = `${webhookUrl}&messageReplyOption=REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD`
+    }
+
+    const responseBody = await notifyGoogleChat(webhookUrl, cardV2Body)
+    core.setOutput('threadName', responseBody.thread.name)
   } catch (error) {
     if (error instanceof Error) {
       core.setFailed(error.message)

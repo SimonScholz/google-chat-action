@@ -74,6 +74,20 @@ on:
           jobStatus: '${{ job.status }}'
 ```
 
+## Threading
+
+It is possible to send multiple messages into the same thread, e.g. when new commits are pushed to an existing Pull Request using the
+`threadKey` or `threadName` input.
+Set `threadKey` to a stable value that uniquely identifies your thread when using the same user (i.e. webhookUrl) for multiple action runs.
+`threadKey` must be set on the first message of the thread as well as all subsequent messages that should be added to the thread.
+Every message sent to Google Chat generates a `threadName`, which can be retrieved by the `threadName` output of this action.
+To reply to an existing thread you can therefore also pass the `threadName` output of one step to the `threadName` input of another.
+This is especially useful when using mutliple users, since the threadKey is only unique per user, allowing you to reply to a thread
+created by one action with one webhookUrl in another action using another webhookUrl.
+
+For more information see the [Google Chat Message Thread API specification](https://developers.google.com/chat/api/reference/rest/v1/spaces.messages#Thread),
+as well as [the Google Chat how-to on starting or replying to a thread](https://developers.google.com/chat/how-tos/webhooks#start_or_reply_to_a_message_thread).
+
 ## Example with all input values
 
 ```yaml
@@ -93,6 +107,7 @@ on:
         collapsibleDefaultSection: false
         uncollapsibleWidgetsCount: 3
         additionalSections: '[{"header": "Additional Section", "collapsible": true, "widgets": [{"decoratedText": {"startIcon": {"knownIcon": "STAR"},"text": "Additional Section"}}] }]'
+        threadKey: ${{ github.event.number }}
 ```
 
 Due to setting `createDefaultSection` and `collapsibleDefaultSection` to false this card also looks pretty small:
@@ -120,3 +135,11 @@ You can also refer to the [action.yml](https://github.com/SimonScholz/google-cha
 | collapsibleDefaultSection | Optional collapsibleSection. Specify whether the section is collapsible.  | false |   🚫      |
 | uncollapsibleWidgetsCount | Optional uncollapsibleWidgetsCount. Specify the amount of uncollapsible widgets within the sections. | 4 |   🚫      |
 | additionalSections |  Add the opportunity to have additional sections. Also see [Google Chat Card V2](https://developers.google.com/chat/api/reference/rest/v1/cards#section) sections array. | 🚫 |    🚫      |
+| threadKey |  Create or reply to a thread identified by this value. For replying to a thread this message must be sent by the same Google Chat user as the initial message. Also see [Google Chat Message Thread](https://developers.google.com/chat/api/reference/rest/v1/spaces.messages#Thread). | 🚫 |    🚫      |
+| threadName |  Reply to a thread regardless of the user that initially created it. Also see [Google Chat Message Thread](https://developers.google.com/chat/api/reference/rest/v1/spaces.messages#Thread). | 🚫 |    🚫      |
+
+## outputs
+
+| Output     | Description   |
+| ---------- | --------------|
+| threadName | Name of thread created by this message. Can be used as input "threadName" for subsequent calls to this action to have follow-up messages in a thread. |

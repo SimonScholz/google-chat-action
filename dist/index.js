@@ -30021,7 +30021,7 @@ exports.createCardV2Body = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const cardHeader_1 = __nccwpck_require__(7567);
 const cardSection_1 = __nccwpck_require__(4205);
-function createCardV2Body() {
+function createCardV2Body(threadName, threadKey) {
     const card = {};
     const cardHeader = (0, cardHeader_1.createCardV2Header)();
     card.header = cardHeader;
@@ -30038,7 +30038,11 @@ function createCardV2Body() {
             {
                 card
             }
-        ]
+        ],
+        thread: {
+            name: threadName,
+            threadKey
+        }
     };
     return JSON.stringify(jsonBody);
 }
@@ -30086,10 +30090,16 @@ const notificationSender_1 = __nccwpck_require__(5299);
  */
 async function run() {
     try {
-        const webhookUrl = core.getInput('webhookUrl', { required: true });
-        const cardV2Body = (0, cardv2body_1.createCardV2Body)();
+        let webhookUrl = core.getInput('webhookUrl', { required: true });
+        const threadName = core.getInput('threadName');
+        const threadKey = core.getInput('threadKey');
+        const cardV2Body = (0, cardv2body_1.createCardV2Body)(threadName, threadKey);
         console.log(cardV2Body);
-        await (0, notificationSender_1.notifyGoogleChat)(webhookUrl, cardV2Body);
+        if (threadName || threadKey) {
+            webhookUrl = `${webhookUrl}&messageReplyOption=REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD`;
+        }
+        const responseBody = await (0, notificationSender_1.notifyGoogleChat)(webhookUrl, cardV2Body);
+        core.setOutput('threadName', responseBody.thread.name);
     }
     catch (error) {
         if (error instanceof Error) {
@@ -30129,6 +30139,7 @@ async function notifyGoogleChat(url, body) {
     if (!response.ok) {
         throw new Error(`Google Chat notification failed! message=${responseBody.error.message} status=${responseBody.error.status} code=${responseBody.error.code}`);
     }
+    return responseBody;
 }
 exports.notifyGoogleChat = notifyGoogleChat;
 

@@ -1,7 +1,7 @@
 export async function notifyGoogleChat(
   url: string,
   body: string
-): Promise<void> {
+): Promise<Message> {
   const response = await fetch(url, {
     method: 'POST',
     cache: 'no-cache',
@@ -19,4 +19,14 @@ export async function notifyGoogleChat(
       `Google Chat notification failed! message=${responseBody.error.message} status=${responseBody.error.status} code=${responseBody.error.code}`
     )
   }
+  return responseBody as Message
+}
+
+type Message = {
+  thread: Thread
+}
+
+type Thread = {
+  name: string
+  threadKey: string
 }
