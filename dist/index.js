@@ -30021,7 +30021,7 @@ exports.createCardV2Body = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const cardHeader_1 = __nccwpck_require__(7567);
 const cardSection_1 = __nccwpck_require__(4205);
-function createCardV2Body(threadName, threadKey) {
+function createCardV2Body() {
     const card = {};
     const cardHeader = (0, cardHeader_1.createCardV2Header)();
     card.header = cardHeader;
@@ -30033,18 +30033,13 @@ function createCardV2Body(threadName, threadKey) {
         const additionalSections = core.getInput('additionalSections');
         card.sections = JSON.parse(additionalSections);
     }
-    const jsonBody = {
+    return {
         cardsV2: [
             {
                 card
             }
-        ],
-        thread: {
-            name: threadName,
-            threadKey
-        }
+        ]
     };
-    return JSON.stringify(jsonBody);
 }
 exports.createCardV2Body = createCardV2Body;
 
@@ -30083,6 +30078,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const cardv2body_1 = __nccwpck_require__(75);
+const thread_1 = __nccwpck_require__(7347);
 const notificationSender_1 = __nccwpck_require__(5299);
 /**
  * The main function for the action.
@@ -30091,14 +30087,16 @@ const notificationSender_1 = __nccwpck_require__(5299);
 async function run() {
     try {
         let webhookUrl = core.getInput('webhookUrl', { required: true });
+        const messageBody = (0, cardv2body_1.createCardV2Body)();
         const threadName = core.getInput('threadName');
         const threadKey = core.getInput('threadKey');
-        const cardV2Body = (0, cardv2body_1.createCardV2Body)(threadName, threadKey);
-        console.log(cardV2Body);
         if (threadName || threadKey) {
             webhookUrl = `${webhookUrl}&messageReplyOption=REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD`;
+            messageBody.thread = (0, thread_1.createThreadBody)(threadName, threadKey);
         }
-        const responseBody = await (0, notificationSender_1.notifyGoogleChat)(webhookUrl, cardV2Body);
+        const messageBodyString = JSON.stringify(messageBody);
+        console.log(messageBodyString);
+        const responseBody = await (0, notificationSender_1.notifyGoogleChat)(webhookUrl, messageBodyString);
         core.setOutput('threadName', responseBody.thread.name);
     }
     catch (error) {
@@ -30168,6 +30166,29 @@ exports.statusMessage = {
     cancelled: 'Run was cancelled',
     failure: 'Run failed'
 };
+
+
+/***/ }),
+
+/***/ 7347:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createThreadBody = void 0;
+function createThreadBody(threadName, threadKey) {
+    if (threadName) {
+        return { name: threadName };
+    }
+    if (threadKey) {
+        return {
+            threadKey
+        };
+    }
+    return {};
+}
+exports.createThreadBody = createThreadBody;
 
 
 /***/ }),

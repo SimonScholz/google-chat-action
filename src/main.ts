@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
 import { createCardV2Body } from './cardv2body'
+import { createThreadBody } from './thread'
 import { notifyGoogleChat } from './notificationSender'
 
 /**
@@ -9,15 +10,17 @@ import { notifyGoogleChat } from './notificationSender'
 export async function run(): Promise<void> {
   try {
     let webhookUrl = core.getInput('webhookUrl', { required: true })
+    const messageBody = createCardV2Body()
     const threadName = core.getInput('threadName')
     const threadKey = core.getInput('threadKey')
-    const cardV2Body = createCardV2Body(threadName, threadKey)
-    console.log(cardV2Body)
     if (threadName || threadKey) {
       webhookUrl = `${webhookUrl}&messageReplyOption=REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD`
+      messageBody.thread = createThreadBody(threadName, threadKey)
     }
 
-    const responseBody = await notifyGoogleChat(webhookUrl, cardV2Body)
+    const messageBodyString = JSON.stringify(messageBody)
+    console.log(messageBodyString)
+    const responseBody = await notifyGoogleChat(webhookUrl, messageBodyString)
     core.setOutput('threadName', responseBody.thread.name)
   } catch (error) {
     if (error instanceof Error) {
