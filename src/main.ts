@@ -19,7 +19,6 @@ export async function run(): Promise<void> {
     }
 
     const messageBodyString = JSON.stringify(messageBody)
-    console.log(messageBodyString)
     const responseBody = await notifyGoogleChat(webhookUrl, messageBodyString)
     core.setOutput('threadName', responseBody.thread.name)
   } catch (error) {

@@ -30095,7 +30095,6 @@ async function run() {
             messageBody.thread = (0, thread_1.createThreadBody)(threadName, threadKey);
         }
         const messageBodyString = JSON.stringify(messageBody);
-        console.log(messageBodyString);
         const responseBody = await (0, notificationSender_1.notifyGoogleChat)(webhookUrl, messageBodyString);
         core.setOutput('threadName', responseBody.thread.name);
     }
@@ -30186,7 +30185,7 @@ function createThreadBody(threadName, threadKey) {
             threadKey
         };
     }
-    return {};
+    throw new Error('Either threadName or threadKey must be provided');
 }
 exports.createThreadBody = createThreadBody;
 
