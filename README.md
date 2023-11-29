@@ -120,7 +120,7 @@ With the `additionalSections` you also gain a lot freedom and also other actions
 
 How an `additionalSections` array has to look like can be found here: https://developers.google.com/chat/api/reference/rest/v1/cards#section 
 
-## inputs
+## Inputs
 
 You can also refer to the [action.yml](https://github.com/SimonScholz/google-chat-action/blob/main/action.yml).
 
@@ -140,8 +140,14 @@ You can also refer to the [action.yml](https://github.com/SimonScholz/google-cha
 | threadKey |  Create or reply to a thread identified by this value. For replying to a thread this message must be sent by the same Google Chat user as the initial message. Also see [Google Chat Message Thread](https://developers.google.com/chat/api/reference/rest/v1/spaces.messages#Thread). | 🚫 |    🚫      |
 | threadName |  Reply to a thread regardless of the user that initially created it. Also see [Google Chat Message Thread](https://developers.google.com/chat/api/reference/rest/v1/spaces.messages#Thread). Takes precedence over threadKey. | 🚫 |    🚫      |
 
-## outputs
+## Outputs
 
 | Output     | Description   |
 | ---------- | --------------|
 | threadName | Name of thread created by this message. Can be used as input "threadName" for subsequent calls to this action to have follow-up messages in a thread. |
+
+## Contributing
+
+If you have any questions or ideas feel free to open an issue or a pull request.
+
+When creating a pull request please make sure that you have run `npm run all` before you commit/push, otherwise CI will fail.
