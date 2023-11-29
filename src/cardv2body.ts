@@ -2,7 +2,7 @@ import * as core from '@actions/core'
 import { createCardV2Header } from './cardHeader'
 import { createCardV2Section } from './cardSection'
 
-export function createCardV2Body(): string {
+export function createCardV2Body(): Record<string, unknown> {
   const card: Record<string, unknown> = {}
   const cardHeader: Record<string, string> = createCardV2Header()
   card.header = cardHeader
@@ -15,13 +15,11 @@ export function createCardV2Body(): string {
     card.sections = JSON.parse(additionalSections)
   }
 
-  const jsonBody = {
+  return {
     cardsV2: [
       {
         card
       }
     ]
   }
-
-  return JSON.stringify(jsonBody)
 }

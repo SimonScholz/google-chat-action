@@ -29163,14 +29163,13 @@ function createCardV2Body() {
         const additionalSections = core.getInput('additionalSections');
         card.sections = JSON.parse(additionalSections);
     }
-    const jsonBody = {
+    return {
         cardsV2: [
             {
                 card
             }
         ]
     };
-    return JSON.stringify(jsonBody);
 }
 exports.createCardV2Body = createCardV2Body;
 
@@ -29209,6 +29208,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const cardv2body_1 = __nccwpck_require__(75);
+const thread_1 = __nccwpck_require__(7347);
 const notificationSender_1 = __nccwpck_require__(5299);
 /**
  * The main function for the action.
@@ -29216,10 +29216,17 @@ const notificationSender_1 = __nccwpck_require__(5299);
  */
 async function run() {
     try {
-        const webhookUrl = core.getInput('webhookUrl', { required: true });
-        const cardV2Body = (0, cardv2body_1.createCardV2Body)();
-        console.log(cardV2Body);
-        await (0, notificationSender_1.notifyGoogleChat)(webhookUrl, cardV2Body);
+        let webhookUrl = core.getInput('webhookUrl', { required: true });
+        const messageBody = (0, cardv2body_1.createCardV2Body)();
+        const threadName = core.getInput('threadName');
+        const threadKey = core.getInput('threadKey');
+        if (threadName || threadKey) {
+            webhookUrl = `${webhookUrl}&messageReplyOption=REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD`;
+            messageBody.thread = (0, thread_1.createThreadBody)(threadName, threadKey);
+        }
+        const messageBodyString = JSON.stringify(messageBody);
+        const responseBody = await (0, notificationSender_1.notifyGoogleChat)(webhookUrl, messageBodyString);
+        core.setOutput('threadName', responseBody.thread.name);
     }
     catch (error) {
         if (error instanceof Error) {
@@ -29259,6 +29266,7 @@ async function notifyGoogleChat(url, body) {
     if (!response.ok) {
         throw new Error(`Google Chat notification failed! message=${responseBody.error.message} status=${responseBody.error.status} code=${responseBody.error.code}`);
     }
+    return responseBody;
 }
 exports.notifyGoogleChat = notifyGoogleChat;
 
@@ -29287,6 +29295,29 @@ exports.statusMessage = {
     cancelled: 'Run was cancelled',
     failure: 'Run failed'
 };
+
+
+/***/ }),
+
+/***/ 7347:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createThreadBody = void 0;
+function createThreadBody(threadName, threadKey) {
+    if (threadName) {
+        return { name: threadName };
+    }
+    if (threadKey) {
+        return {
+            threadKey
+        };
+    }
+    throw new Error('Either threadName or threadKey must be provided');
+}
+exports.createThreadBody = createThreadBody;
 
 
 /***/ }),

@@ -48,3 +48,13 @@ inputs:
     description: 'Add the opportunity to have additional sections.'
     required: false
     default: '[]'
+  threadName:
+    description: 'Reply to a thread identified by this value. See https://developers.google.com/chat/api/reference/rest/v1/spaces.messages#Thread for more information'
+    required: false
+  threadKey:
+    description: 'Create or reply to a thread identified by this value. For replying to a thread this message must be sent by the same Google Chat user as the initial message.'
+    required: false
+
+outputs:
+  threadName:
+    description: 'Name of thread created by this message. Can be used as input "threadName" for subsequent calls to this action to have follow-up messages in a thread.'
