@@ -10,5 +10,5 @@ export function createThreadBody(
       threadKey
     }
   }
-  return {}
+throw new Error("Either threadName or threadKey must be provided");
 }
