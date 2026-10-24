@@ -7,6 +7,10 @@ updates:
       - actions
     schedule:
       interval: daily
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
 
   - package-ecosystem: npm
     directory: /
@@ -15,3 +19,7 @@ updates:
       - npm
     schedule:
       interval: daily
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
