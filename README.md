@@ -25,7 +25,7 @@ on:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # ... Run your build stuff or whatever ...
 
@@ -62,7 +62,7 @@ on:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # ... Run your build stuff or whatever ...
 

@@ -3,7 +3,7 @@ description: "GitHub action to send highly customizable card V2 notifications to
 author: "Simon Scholz"
 
 runs:
-  using: node20
+  using: node24
   main: dist/index.js
 
 branding:
